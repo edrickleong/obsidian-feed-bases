@@ -17,8 +17,22 @@ export const FeedReactView: React.FC<FeedReactViewProps> = ({
     getScrollElement: getScrollEl,
     estimateSize: () => 280, // rough average height; real size will be measured
     overscan: 8,
-    measureElement: (el: Element | null) =>
-      (el as HTMLElement | null)?.getBoundingClientRect().height ?? 0,
+    measureElement: (element, entry, instance) => {
+      const direction = instance.scrollDirection;
+      if (direction === "forward" || direction === null) {
+        return (
+          (element as HTMLElement | null)?.getBoundingClientRect().height ?? 0
+        );
+      } else {
+        // Don't remeasure if we are scrolling up to prevent stuttering
+        const indexKey = Number(
+          (element as HTMLElement).getAttribute("data-index"),
+        );
+        // @ts-ignore - accessing private property for performance fix (see https://github.com/TanStack/virtual/issues/659)
+        let cacheMeasurement = instance.itemSizeCache.get(indexKey);
+        return cacheMeasurement ?? 0;
+      }
+    },
   });
 
   const virtualItems = rowVirtualizer.getVirtualItems();
