@@ -1,0 +1,135 @@
+/* Feed View Styles */
+.bases-feed-container {
+  padding: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.bases-feed-container.is-loading {
+  opacity: 0.5;
+}
+
+.bases-feed {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Virtualized list container holds absolute-positioned rows */
+.bases-feed-virtualizer {
+  position: relative;
+  width: 100%;
+}
+
+/* Virtualized item row positioned within the container */
+.bases-feed-virtual-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* Use padding for vertical spacing so the virtualizer's measurement includes the gap */
+  padding-bottom: 16px;
+  box-sizing: border-box;
+}
+
+.bases-feed-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: var(--text-muted);
+  font-size: var(--font-ui-medium);
+}
+
+.bases-feed-entry {
+  background-color: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+@media (hover: hover) {
+  .bases-feed-entry:hover {
+    border-color: var(--background-modifier-border-hover);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.bases-feed-entry-header {
+  margin-bottom: 16px;
+}
+
+.bases-feed-entry-title {
+  font-size: var(--font-ui-large);
+  font-weight: 600;
+  color: var(--text-normal);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.bases-feed-entry-title:hover {
+  color: var(--interactive-accent);
+}
+.bases-feed-entry-content {
+  color: var(--text-normal);
+  font-size: var(--font-ui-medium);
+  line-height: 1.6;
+}
+
+.bases-feed-entry-editor .markdown-source-view {
+  font-family: var(--font-text);
+  font-size: var(--font-text-size);
+  line-height: 1.6;
+}
+
+.bases-feed-entry-editor .cm-editor {
+  border: none;
+  background-color: transparent;
+}
+
+.bases-feed-entry-editor .cm-scroller {
+  padding: 0 !important;
+  margin: 0 !important;
+  --file-margins: 0px !important;
+  --file-line-width: 100% !important;
+}
+
+.bases-feed-entry-editor .cm-content {
+  padding: 0 !important;
+  min-height: 0 !important;
+}
+
+.bases-feed-entry-editor .workspace-leaf-content {
+  padding: 0 !important;
+}
+
+.bases-feed-entry-editor .view-content {
+  padding: 0 !important;
+  height: auto !important;
+}
+
+.bases-feed-entry-editor .view-header,
+.bases-feed-entry-editor .view-actions {
+  display: none;
+}
+
+/* Hide inline title and properties in the editor */
+.bases-feed-entry-editor .inline-title {
+  display: none;
+}
+
+.bases-feed-entry-editor .metadata-container {
+  display: none;
+}
+
+.bases-feed-entry-editor {
+  --metadata-display-editing: none;
+}
+
+.bases-feed-error {
+  color: var(--text-error);
+  font-size: var(--font-ui-small);
+  padding: 12px;
+  background-color: var(--background-modifier-error);
+  border-radius: 4px;
+}
