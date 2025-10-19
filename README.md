@@ -1,6 +1,6 @@
 ## Obsidian Feed Bases
 
-<img src="screenshot.png" alt="screenshot" width="600"/>
+![](screenshot.png)
 
 Adds a feed layout to [Obsidian Bases](https://help.obsidian.md/bases) so you can display notes with their content in an editable feed view.
 
