@@ -1,5 +1,7 @@
 ## Obsidian Feed Bases
 
+<img src="screenshot.png" alt="screenshot" width="600"/>
+
 Adds a feed layout to [Obsidian Bases](https://help.obsidian.md/bases) so you can display notes with their content in an editable feed view.
 
 - Display all notes from your bases in a scrollable feed.
