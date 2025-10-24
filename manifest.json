@@ -1,7 +1,7 @@
 {
 	"id": "feed-bases",
 	"name": "Feed Bases",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"minAppVersion": "1.10.0",
 	"description": "Adds a feed layout to bases so you can display notes with their content in an editable feed view.",
 	"author": "Edrick Leong",
