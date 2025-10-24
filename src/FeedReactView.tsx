@@ -57,7 +57,10 @@ export const FeedReactView: React.FC<FeedReactViewProps> = ({
                   data-index={vi.index}
                   ref={rowVirtualizer.measureElement}
                   className="bases-feed-virtual-item"
-                  style={{ transform: `translateY(${vi.start}px)` }}
+                  style={{
+                    transform: `translateY(${vi.start}px)`,
+                    transition: "transform 0.3s",
+                  }}
                 >
                   <FeedEntry
                     entry={entry}
