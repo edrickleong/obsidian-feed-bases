@@ -122,9 +122,6 @@ const FeedEntry: React.FC<FeedEntryProps> = ({
             node.replaceChildren();
             const err = node.createDiv("bases-feed-error");
             err.setText("Failed to load markdown editor");
-            try {
-              leaf.detach();
-            } catch {}
             return;
           }
 
@@ -139,12 +136,9 @@ const FeedEntry: React.FC<FeedEntryProps> = ({
         try {
           node.replaceChildren();
         } catch {}
-        try {
-          leaf.detach();
-        } catch {}
       };
     },
-    [app, entry.file, showProperties],
+    [app, entry.file],
   );
 
   return (
