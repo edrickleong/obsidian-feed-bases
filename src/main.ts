@@ -8,6 +8,14 @@ export default class ObsidianFeedPlugin extends Plugin {
       icon: "lucide-newspaper",
       factory: (controller, containerEl) =>
         new FeedView(controller, containerEl),
+      options: () => [
+        {
+          key: "showProperties",
+          type: "toggle",
+          displayName: "Show note properties (Experimental)",
+          default: false,
+        },
+      ],
     });
   }
 

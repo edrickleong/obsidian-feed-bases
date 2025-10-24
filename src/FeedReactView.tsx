@@ -8,6 +8,7 @@ export const FeedReactView: React.FC<FeedReactViewProps> = ({
   onEntryClick,
   onEntryContextMenu,
   scrollElement,
+  showProperties,
 }) => {
   const app = useApp();
   const getScrollEl = useMemo(() => () => scrollElement, [scrollElement]);
@@ -61,6 +62,7 @@ export const FeedReactView: React.FC<FeedReactViewProps> = ({
                   <FeedEntry
                     entry={entry}
                     app={app}
+                    showProperties={showProperties}
                     onEntryClick={onEntryClick}
                     onEntryContextMenu={onEntryContextMenu}
                   />
@@ -77,6 +79,7 @@ export const FeedReactView: React.FC<FeedReactViewProps> = ({
 const FeedEntry: React.FC<FeedEntryProps> = ({
   entry,
   app,
+  showProperties,
   onEntryClick,
   onEntryContextMenu,
 }) => {
@@ -141,7 +144,7 @@ const FeedEntry: React.FC<FeedEntryProps> = ({
         } catch {}
       };
     },
-    [app, entry.file],
+    [app, entry.file, showProperties],
   );
 
   return (
@@ -158,7 +161,15 @@ const FeedEntry: React.FC<FeedEntryProps> = ({
       </div>
 
       <div className="bases-feed-entry-content">
-        <div ref={setEditorHost} className="bases-feed-entry-editor" />
+        <div
+          ref={setEditorHost}
+          className="bases-feed-entry-editor"
+          style={
+            {
+              "--metadata-display-editing": showProperties ? "block" : "none",
+            } as React.CSSProperties
+          }
+        />
       </div>
     </div>
   );
@@ -171,11 +182,13 @@ type FeedReactViewProps = {
   onEntryClick: (entry: BasesEntry, isModEvent: boolean) => void;
   onEntryContextMenu: (evt: React.MouseEvent, entry: BasesEntry) => void;
   scrollElement: HTMLElement;
+  showProperties: boolean;
 };
 
 type FeedEntryProps = {
   entry: BasesEntry;
   app: App;
+  showProperties: boolean;
   onEntryClick: (entry: BasesEntry, isModEvent: boolean) => void;
   onEntryContextMenu: (evt: React.MouseEvent, entry: BasesEntry) => void;
 };

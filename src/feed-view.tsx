@@ -146,12 +146,16 @@ export class FeedView extends BasesView {
       this.root = createRoot(this.containerEl);
     }
 
+    const showProperties =
+      (this.config.get("showProperties") as boolean | undefined) ?? false;
+
     this.root.render(
       <StrictMode>
         <AppContext.Provider value={this.app}>
           <FeedReactView
             entries={this.entries}
             scrollElement={this.scrollEl}
+            showProperties={showProperties}
             onEntryClick={(entry: BasesEntry, isModEvent: boolean) => {
               void this.app.workspace.openLinkText(
                 entry.file.path,

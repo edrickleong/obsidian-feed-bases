@@ -118,14 +118,6 @@
   display: none;
 }
 
-.bases-feed-entry-editor .metadata-container {
-  display: none;
-}
-
-.bases-feed-entry-editor {
-  --metadata-display-editing: none;
-}
-
 .bases-feed-error {
   color: var(--text-error);
   font-size: var(--font-ui-small);
