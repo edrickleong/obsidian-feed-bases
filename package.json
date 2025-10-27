@@ -1,6 +1,6 @@
 {
 	"name": "feed-bases",
-	"version": "0.1.2",
+	"version": "0.2.0",
 	"description": "Adds feed view to Obsidian Bases.",
 	"main": "main.js",
 	"scripts": {

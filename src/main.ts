@@ -15,6 +15,21 @@ export default class ObsidianFeedPlugin extends Plugin {
           displayName: "Show note properties (Experimental)",
           default: false,
         },
+        {
+          key: "multipleColumns",
+          type: "toggle",
+          displayName: "Show notes in multiple columns (Experimental)",
+          default: false,
+        },
+        {
+          key: "maxCardWidth",
+          type: "slider",
+          displayName: "Maximum card width (Experimental)",
+          default: 400,
+          min: 200,
+          max: 800,
+          step: 10,
+        },
       ],
     });
   }
