@@ -123,16 +123,19 @@ export class FeedView extends BasesView {
       });
   }
 
-  private getPropertyValue(entry: BasesEntry, propId: BasesPropertyId): any {
+  private getPropertyValue(
+    entry: BasesEntry,
+    propId: BasesPropertyId,
+  ): string | number | null {
     try {
       const value = entry.getValue(propId);
       if (!value || !value.isTruthy()) return null;
 
       // Try to get a comparable value
-      const valueObj = value as any;
+      const valueObj = value as unknown;
       if (valueObj instanceof Date) return valueObj.getTime();
-      if (typeof valueObj === "object" && "valueOf" in valueObj) {
-        return valueObj.valueOf();
+      if (typeof valueObj === "object" && valueObj && "valueOf" in valueObj) {
+        return (valueObj as { valueOf: () => string | number }).valueOf();
       }
       const str = value.toString();
       return str && str.trim().length > 0 ? str : null;
@@ -163,15 +166,15 @@ export class FeedView extends BasesView {
             multipleColumns={multipleColumns}
             maxCardWidth={maxCardWidth}
             onEntryClick={(entry: BasesEntry, isModEvent: boolean) => {
-              void this.app.workspace.openLinkText(
-                entry.file.path,
-                "",
-                isModEvent,
-              );
+              this.app.workspace
+                .openLinkText(entry.file.path, "", isModEvent)
+                .catch((err) => {
+                  console.error("Failed to open link:", err);
+                });
             }}
             onEntryContextMenu={(evt: React.MouseEvent, entry: BasesEntry) => {
               evt.preventDefault();
-              this.showEntryContextMenu(evt.nativeEvent as MouseEvent, entry);
+              this.showEntryContextMenu(evt.nativeEvent, entry);
             }}
           />
         </AppContext.Provider>

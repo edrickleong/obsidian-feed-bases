@@ -19,7 +19,6 @@ export const MasonryView: React.FC<MasonryViewProps> = ({
 }) => {
   const app = useApp();
   const containerRef = useRef<HTMLDivElement>(null);
-  const [containerWidth, setContainerWidth] = useState(0);
   const [columnCount, setColumnCount] = useState(1);
 
   // Track container width for responsive column calculation
@@ -29,7 +28,6 @@ export const MasonryView: React.FC<MasonryViewProps> = ({
     const updateWidth = () => {
       if (containerRef.current) {
         const width = containerRef.current.offsetWidth;
-        setContainerWidth(width);
 
         // Calculate column count based on container width and max card width
         // Account for gaps between columns (16px per gap)
@@ -118,7 +116,7 @@ const MasonryColumn: React.FC<MasonryColumnProps> = ({
           (element as HTMLElement).getAttribute("data-index"),
         );
         // @ts-ignore - accessing private property for performance fix
-        let cacheMeasurement = instance.itemSizeCache.get(indexKey);
+        const cacheMeasurement = instance.itemSizeCache.get(indexKey);
         return cacheMeasurement ?? 0;
       }
     },
@@ -195,7 +193,7 @@ const FeedEntry: React.FC<FeedEntryProps> = ({
       let alive = true;
       // @ts-ignore using internal API
       const leaf = new WorkspaceLeaf(app);
-      (async () => {
+      void (async () => {
         try {
           await leaf.openFile(entry.file, {
             state: { mode: "source", source: false },
@@ -206,7 +204,7 @@ const FeedEntry: React.FC<FeedEntryProps> = ({
           if (!(view instanceof MarkdownView)) {
             node.replaceChildren();
             const err = node.createDiv("bases-feed-error");
-            err.setText("Failed to load markdown editor");
+            err.setText("Failed to load Markdown editor");
             return;
           }
 
@@ -218,9 +216,7 @@ const FeedEntry: React.FC<FeedEntryProps> = ({
 
       return () => {
         alive = false;
-        try {
-          node.replaceChildren();
-        } catch {}
+        node.replaceChildren();
       };
     },
     [app, entry.file],

@@ -13,8 +13,6 @@ export const FeedReactView: React.FC<FeedReactViewProps> = ({
   multipleColumns = false,
   maxCardWidth = 400,
 }) => {
-  const app = useApp();
-
   // Conditionally render masonry or single column view
   if (multipleColumns) {
     return (
@@ -70,7 +68,7 @@ const SingleColumnView: React.FC<SingleColumnViewProps> = ({
           (element as HTMLElement).getAttribute("data-index"),
         );
         // @ts-ignore - accessing private property for performance fix (see https://github.com/TanStack/virtual/issues/659)
-        let cacheMeasurement = instance.itemSizeCache.get(indexKey);
+        const cacheMeasurement = instance.itemSizeCache.get(indexKey);
         return cacheMeasurement ?? 0;
       }
     },
@@ -154,7 +152,7 @@ const FeedEntry: React.FC<FeedEntryProps> = ({
       let alive = true;
       // @ts-ignore using internal API
       const leaf = new WorkspaceLeaf(app);
-      (async () => {
+      void (async () => {
         try {
           await leaf.openFile(entry.file, {
             state: { mode: "source", source: false },
@@ -165,7 +163,7 @@ const FeedEntry: React.FC<FeedEntryProps> = ({
           if (!(view instanceof MarkdownView)) {
             node.replaceChildren();
             const err = node.createDiv("bases-feed-error");
-            err.setText("Failed to load markdown editor");
+            err.setText("Failed to load Markdown editor");
             return;
           }
 
@@ -177,9 +175,7 @@ const FeedEntry: React.FC<FeedEntryProps> = ({
 
       return () => {
         alive = false;
-        try {
-          node.replaceChildren();
-        } catch {}
+        node.replaceChildren();
       };
     },
     [app, entry.file],

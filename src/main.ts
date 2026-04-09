@@ -2,7 +2,7 @@ import { Plugin } from "obsidian";
 import { FeedView, FeedViewType } from "./feed-view";
 
 export default class ObsidianFeedPlugin extends Plugin {
-  async onload() {
+  onload() {
     this.registerBasesView(FeedViewType, {
       name: "Feed",
       icon: "lucide-newspaper",
@@ -12,19 +12,19 @@ export default class ObsidianFeedPlugin extends Plugin {
         {
           key: "showProperties",
           type: "toggle",
-          displayName: "Show note properties (Experimental)",
+          displayName: "Show note properties (experimental)",
           default: false,
         },
         {
           key: "multipleColumns",
           type: "toggle",
-          displayName: "Show notes in multiple columns (Experimental)",
+          displayName: "Show notes in multiple columns (experimental)",
           default: false,
         },
         {
           key: "maxCardWidth",
           type: "slider",
-          displayName: "Maximum card width (Experimental)",
+          displayName: "Maximum card width (experimental)",
           default: 400,
           min: 200,
           max: 800,
